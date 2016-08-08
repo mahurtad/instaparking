@@ -6885,3 +6885,19 @@ button.close {
   font-size: 12px;
   padding: .1em;
 }
+
+/*Responsive del mapa*/
+.map_container{
+    position: relative;
+    width: 100%;
+    padding-bottom: 50.00%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+.map_container .map{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
