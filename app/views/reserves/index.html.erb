@@ -1,37 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Reserves</h1>
-
-<table>
+<%- model_class = Reserve -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Id reserve</th>
-      <th>Date entry</th>
-      <th>Date out</th>
-      <th>Amount pay</th>
-      <th>Car</th>
-      <th>Parking</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:id_reserve) %></th>
+      <th><%= model_class.human_attribute_name(:date_entry) %></th>
+      <th><%= model_class.human_attribute_name(:date_out) %></th>
+      <th><%= model_class.human_attribute_name(:amount_pay) %></th>
+      <th><%= model_class.human_attribute_name(:car) %></th>
+      <th><%= model_class.human_attribute_name(:parking) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @reserves.each do |reserf| %>
+    <% @reserves.each do |reserve| %>
       <tr>
-        <td><%= reserf.id_reserve %></td>
-        <td><%= reserf.date_entry %></td>
-        <td><%= reserf.date_out %></td>
-        <td><%= reserf.amount_pay %></td>
-        <td><%= reserf.car %></td>
-        <td><%= reserf.parking %></td>
-        <td><%= link_to 'Show', reserf %></td>
-        <td><%= link_to 'Edit', edit_reserf_path(reserf) %></td>
-        <td><%= link_to 'Destroy', reserf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to parking.id, parking_path(parking) %></td>
+        <td><%= reserve.id_reserve %></td>
+        <td><%= reserve.date_entry %></td>
+        <td><%= reserve.date_out %></td>
+        <td><%= reserve.amount_pay %></td>
+        <td><%= reserve.car %></td>
+        <td><%= reserve.parking %></td>
+        <td><%= reserve.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_reserf_path(reserve), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      reserf_path(reserve),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_reserf_path,
+            :class => 'btn btn-primary' %>
 
-<%= link_to 'New Reserf', new_reserf_path %>
+

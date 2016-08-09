@@ -4,11 +4,11 @@ class PagesController < StaticController
     @hash = Gmaps4rails.build_markers(@parkings) do |parkings, marker|
     marker.lat parkings.latitude
     marker.lng parkings.longitude
-    #marker.infowindow render_to_string("find_parking") #:partial => "layouts/menu")
-    #marker.infowindow render_to_string(:partial => "/reserves/index")#, :locals => { :object => reserve}).gsub(/\n/, '').gsub(/"/, '\"')
-    #marker.call (:partial => "layouts/menu")
-    marker.infowindow parkings.address
-    #render_to_string(:partial => "/reserves", :locals => { :object => user}).gsub(/\n/, '').gsub(/"/, '\"')
+    marker.infowindow render_to_string( :partial => "reserves/enlace")
+    marker.picture({
+    "url" => "http://findicons.com/files/icons/1925/signals/32/parking.png" ,
+    "width" => 32 ,
+    "height" => 32})
     end
   end
 
