@@ -1,27 +1,28 @@
-
-<p id="notice"><%= notice %></p>
-
-<h1>Parkings</h1>
-
-<table>
+<%- model_class = Parking -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Id parking</th>
-      <th>Address</th>
-      <th>Name</th>
-      <th>Number</th>
-      <th>Pricing hour</th>
-      <th>Image one</th>
-      <th>Image two</th>
-      <th>latitude</th>
-      <th>longitude</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:id_parking) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:number) %></th>
+      <th><%= model_class.human_attribute_name(:pricing_hour) %></th>
+      <th><%= model_class.human_attribute_name(:image_one) %></th>
+      <th><%= model_class.human_attribute_name(:image_two) %></th>
+      <th><%= model_class.human_attribute_name(:latitude) %></th>
+      <th><%= model_class.human_attribute_name(:longitude) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @parkings.each do |parking| %>
       <tr>
+        <td><%= link_to parking.id, parking_path(parking) %></td>
         <td><%= parking.id_parking %></td>
         <td><%= parking.address %></td>
         <td><%= parking.name %></td>
@@ -31,16 +32,21 @@
         <td><%= parking.image_two %></td>
         <td><%= parking.latitude %></td>
         <td><%= parking.longitude %></td>
-        <td><%= link_to 'Show', parking %></td>
-        <td><%= link_to 'Edit', edit_parking_path(parking) %></td>
-        <td><%= link_to 'Destroy', parking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l parking.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_parking_path(parking), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      parking_path(parking),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Parking', new_parking_path %>
-
-      
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_parking_path,
+            :class => 'btn btn-primary' %>

@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806180433) do
-
-  create_table "Car", primary_key: "id_car", id: :string, limit: 7, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "model_car",        limit: 20
-    t.string  "brand_car",        limit: 20
-    t.integer "Client_id_client",            null: false
-  end
+ActiveRecord::Schema.define(version: 20160809025825) do
 
   create_table "cars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "id_car"
@@ -24,6 +18,8 @@ ActiveRecord::Schema.define(version: 20160806180433) do
     t.string   "brand_car"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_cars_on_user_id", using: :btree
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -96,6 +92,7 @@ ActiveRecord::Schema.define(version: 20160806180433) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "cars", "users"
   add_foreign_key "comments", "reserves", column: "reserve_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "reserves", "cars"

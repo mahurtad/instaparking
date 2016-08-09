@@ -1,13 +1,11 @@
-<%= simple_form_for(@car) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :id_car %>
-    <%= f.input :model_car %>
-    <%= f.input :brand_car %>
-  </div>
-
+<%= simple_form_for @car, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :id_car %>
+  <%= f.input :model_car %>
+  <%= f.input :brand_car %>
+  <%= f.association :user %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                cars_path, :class => 'btn' %>
   </div>
 <% end %>
