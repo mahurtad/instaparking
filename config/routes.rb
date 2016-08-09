@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   get 'pages/find_parking'
   
-  get 'pages/parking'
+  #get 'pages/parking'
     
   root 'pages#index'
 
